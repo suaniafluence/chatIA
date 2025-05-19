@@ -1,0 +1,56 @@
+<!-- IAfluence Chatbot Integration Snippet -->
+<!-- Copiez ce code juste avant la balise de fermeture </body> de votre site web -->
+
+<script type="text/javascript">
+    (function() {
+        // Configuration du chatbot
+        var iafluenceConfig = {
+            clientId: '{{CLIENT_ID}}', // Sera remplacé dynamiquement lors de la génération
+            serverUrl: '{{SERVER_URL}}', // Sera remplacé dynamiquement lors de la génération
+            options: {
+                position: 'bottom-right', // Position du bouton: 'bottom-right', 'bottom-left', 'top-right', 'top-left'
+                primaryColor: '#4f46e5', // Couleur principale
+                secondaryColor: '#ffffff', // Couleur secondaire
+                chatbotName: 'Assistant IA', // Nom du chatbot
+                welcomeMessage: 'Bonjour ! Comment puis-je vous aider aujourd\'hui ?', // Message de bienvenue
+                logoUrl: '', // URL du logo (laisser vide pour utiliser l'icône par défaut)
+                showBranding: true, // Afficher "Propulsé par IAfluence"
+                autoOpen: false, // Ouverture automatique
+                delayAutoOpen: 5000 // Délai avant ouverture automatique (ms)
+            }
+        };
+
+        // Création du conteneur du chatbot
+        var container = document.createElement('div');
+        container.id = 'iafluence-chatbot-container';
+        container.setAttribute('data-position', iafluenceConfig.options.position);
+        container.setAttribute('data-primary-color', iafluenceConfig.options.primaryColor);
+        container.setAttribute('data-secondary-color', iafluenceConfig.options.secondaryColor);
+        container.setAttribute('data-chatbot-name', iafluenceConfig.options.chatbotName);
+        container.setAttribute('data-welcome-message', iafluenceConfig.options.welcomeMessage);
+        container.setAttribute('data-logo-url', iafluenceConfig.options.logoUrl);
+        container.setAttribute('data-show-branding', iafluenceConfig.options.showBranding ? 'true' : 'false');
+        container.setAttribute('data-auto-open', iafluenceConfig.options.autoOpen ? 'true' : 'false');
+        container.setAttribute('data-delay-auto-open', iafluenceConfig.options.delayAutoOpen);
+        document.body.appendChild(container);
+
+        // Chargement du CSS
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = iafluenceConfig.serverUrl + '/widgets/css/chatbot-widget.min.css';
+        document.head.appendChild(link);
+
+        // Chargement du script
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = iafluenceConfig.serverUrl + '/widgets/js/chatbot-widget.min.js';
+        script.onload = function() {
+            // Initialisation du chatbot une fois le script chargé
+            if (window.IAfluenceChatbot) {
+                window.IAfluenceChatbot.init(iafluenceConfig);
+            }
+        };
+        document.body.appendChild(script);
+    })();
+</script>

@@ -1,0 +1,305 @@
+/* Styles pour le widget de chatbot IAfluence */
+
+/* Variables CSS pour la personnalisation */
+:root {
+    --iafluence-primary-color: #4f46e5;
+    --iafluence-secondary-color: #ffffff;
+    --iafluence-text-color: #333333;
+    --iafluence-background-color: #ffffff;
+    --iafluence-border-radius: 12px;
+    --iafluence-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --iafluence-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Conteneur principal */
+#iafluence-chatbot-container {
+    position: fixed;
+    z-index: 9999;
+    font-family: var(--iafluence-font-family);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Positionnement du conteneur */
+#iafluence-chatbot-container[data-position="bottom-right"] {
+    right: 20px;
+    bottom: 20px;
+}
+
+#iafluence-chatbot-container[data-position="bottom-left"] {
+    left: 20px;
+    bottom: 20px;
+}
+
+#iafluence-chatbot-container[data-position="top-right"] {
+    right: 20px;
+    top: 20px;
+}
+
+#iafluence-chatbot-container[data-position="top-left"] {
+    left: 20px;
+    top: 20px;
+}
+
+/* Bouton du chatbot */
+.iafluence-chatbot-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--iafluence-primary-color);
+    box-shadow: var(--iafluence-shadow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.iafluence-chatbot-button:hover {
+    transform: scale(1.05);
+}
+
+.iafluence-chatbot-button-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Fenêtre du chatbot */
+.iafluence-chatbot-window {
+    position: absolute;
+    width: 350px;
+    height: 500px;
+    background-color: var(--iafluence-background-color);
+    border-radius: var(--iafluence-border-radius);
+    box-shadow: var(--iafluence-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Positionnement de la fenêtre */
+.iafluence-chatbot-window-bottom-right {
+    right: 0;
+    bottom: 70px;
+}
+
+.iafluence-chatbot-window-bottom-left {
+    left: 0;
+    bottom: 70px;
+}
+
+.iafluence-chatbot-window-top-right {
+    right: 0;
+    top: 70px;
+}
+
+.iafluence-chatbot-window-top-left {
+    left: 0;
+    top: 70px;
+}
+
+/* En-tête de la fenêtre */
+.iafluence-chatbot-header {
+    padding: 15px;
+    background-color: var(--iafluence-primary-color);
+    color: var(--iafluence-secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.iafluence-chatbot-logo, .iafluence-chatbot-default-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.iafluence-chatbot-title {
+    flex-grow: 1;
+    font-weight: 600;
+}
+
+.iafluence-chatbot-close {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.iafluence-chatbot-close:hover {
+    opacity: 1;
+}
+
+/* Conteneur des messages */
+.iafluence-chatbot-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f9fafb;
+}
+
+/* Messages */
+.iafluence-chatbot-message {
+    margin-bottom: 15px;
+    max-width: 80%;
+    clear: both;
+}
+
+.iafluence-chatbot-message-user {
+    float: right;
+}
+
+.iafluence-chatbot-message-bot {
+    float: left;
+}
+
+.iafluence-chatbot-message-content {
+    padding: 10px 15px;
+    border-radius: 18px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+}
+
+.iafluence-chatbot-message-user .iafluence-chatbot-message-content {
+    background-color: var(--iafluence-primary-color);
+    color: var(--iafluence-secondary-color);
+    border-bottom-right-radius: 4px;
+}
+
+.iafluence-chatbot-message-bot .iafluence-chatbot-message-content {
+    background-color: #e5e7eb;
+    color: var(--iafluence-text-color);
+    border-bottom-left-radius: 4px;
+}
+
+.iafluence-chatbot-message-time {
+    font-size: 11px;
+    color: #6b7280;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Indicateur de chargement */
+.iafluence-chatbot-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.iafluence-chatbot-loading span {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: #9ca3af;
+    border-radius: 50%;
+    display: inline-block;
+    animation: iafluence-chatbot-loading 1.4s infinite ease-in-out both;
+}
+
+.iafluence-chatbot-loading span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.iafluence-chatbot-loading span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes iafluence-chatbot-loading {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Pied de page */
+.iafluence-chatbot-footer {
+    padding: 15px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+}
+
+.iafluence-chatbot-input {
+    flex-grow: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    padding: 8px 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.iafluence-chatbot-input:focus {
+    border-color: var(--iafluence-primary-color);
+}
+
+.iafluence-chatbot-send {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--iafluence-primary-color);
+    color: var(--iafluence-secondary-color);
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.iafluence-chatbot-send:hover {
+    background-color: #4338ca;
+}
+
+/* Branding */
+.iafluence-chatbot-branding {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.iafluence-chatbot-branding a {
+    color: var(--iafluence-primary-color);
+    text-decoration: none;
+}
+
+.iafluence-chatbot-branding a:hover {
+    text-decoration: underline;
+}
+
+/* Liens dans les messages */
+.iafluence-chatbot-message-content a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.iafluence-chatbot-message-content a:hover {
+    opacity: 0.8;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .iafluence-chatbot-window {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 120px);
+        max-height: 500px;
+    }
+    
+    .iafluence-chatbot-window-bottom-right,
+    .iafluence-chatbot-window-bottom-left {
+        left: 20px;
+        right: 20px;
+        bottom: 80px;
+    }
+    
+    .iafluence-chatbot-window-top-right,
+    .iafluence-chatbot-window-top-left {
+        left: 20px;
+        right: 20px;
+        top: 80px;
+    }
+}
